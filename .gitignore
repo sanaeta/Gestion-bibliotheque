@@ -1,0 +1,12 @@
+# Dossier de compilation Maven
+/target/
+
+# Fichiers de configuration Eclipse (spécifiques à chaque PC)
+.settings/
+.project
+.classpath
+bin/
+
+# Fichiers système
+.DS_Store
+Thumbs.db
