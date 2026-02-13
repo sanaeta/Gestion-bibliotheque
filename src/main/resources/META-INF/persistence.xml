@@ -1,9 +1,27 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence" version="2.2">
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<persistence xmlns="https://jakarta.ee/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence 
+                                 https://jakarta.ee/xml/ns/persistence/persistence_3_0.xsd"
+             version="3.0">
+
+    <!-- 🚨 COMMUN : Nom de l'unité utilisé par tout le groupe -->
     <persistence-unit name="LibraryPU" transaction-type="JTA">
+        
+        <!-- 🚨 COMMUN : Nom JNDI configuré sur vos serveurs Payara -->
         <jta-data-source>jdbc/bibliothequeDS</jta-data-source>
+
         <properties>
-            <property name="javax.persistence.schema-generation.database.action" value="update"/>
+            <!-- Génère ou met à jour les tables SQL automatiquement selon vos classes Java -->
+            <property name="jakarta.persistence.schema-generation.database.action" value="update"/>
+            
+            <!-- Optimisation pour MySQL 8 et versions supérieures -->
+            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL8Dialect"/>
+            
+            <!-- Affiche les requêtes SQL dans la console d'Eclipse (très utile pour débugger) -->
+            <property name="hibernate.show_sql" value="true"/>
+            <property name="hibernate.format_sql" value="true"/>
         </properties>
     </persistence-unit>
+    
 </persistence>
