@@ -8,12 +8,8 @@
     <persistence-unit name="LibraryPU" transaction-type="JTA">
         <jta-data-source>jdbc/bibliothequeDS</jta-data-source>
 
-        <!-- 🚨 DÉCLARATION MANUELLE DES CLASSES 🚨 -->
-        <class>com.biblio.entities.Utilisateur</class>
-        <class>com.biblio.entities.Livre</class>
-        <class>com.biblio.entities.Emprunt</class>
-
         <properties>
+        <property name="eclipselink.deploy-on-startup" value="true"/>
             <property name="jakarta.persistence.schema-generation.database.action" value="update"/>
             <property name="eclipselink.logging.level" value="FINE"/>
         </properties>

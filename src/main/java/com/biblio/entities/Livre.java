@@ -11,7 +11,14 @@ public class Livre {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     public Livre() {
-		super();
 	}
     // autres attributs
+	public int getQuantiteDispo() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	public void setQuantiteDispo(int i) {
+		// TODO Auto-generated method stub
+		
+	}
 }
