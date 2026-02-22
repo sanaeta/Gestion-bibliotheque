@@ -41,10 +41,10 @@ public class EmpruntServlet extends HttpServlet {
         Utilisateur userConnecte = (Utilisateur) session.getAttribute("userSession");
         
         // 2. SÉCURITÉ : Vérifier si l'utilisateur est bien connecté
-       /* if (userConnecte == null) {
+        if (userConnecte == null) {
             response.sendRedirect("login.jsp");
             return;
-        } */
+        } 
 
         try {
             Long idLivre = Long.parseLong(livreIdStr);
@@ -63,7 +63,7 @@ public class EmpruntServlet extends HttpServlet {
             // 5. GESTION DES ERREURS (Ex: Stock vide)
             // On renvoie l'erreur à la page pour l'afficher à l'utilisateur
             request.setAttribute("erreur", "Erreur : " + e.getMessage());
-            request.getRequestDispatcher("/client/catalogue_test.jsp").forward(request, response);
+            request.getRequestDispatcher("/client/catalogue.jsp").forward(request, response);
         }
     }
 }

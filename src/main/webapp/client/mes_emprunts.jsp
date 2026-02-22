@@ -74,11 +74,7 @@
             </table>
         </div>
 
-        <div class="mt-4">
-            <a href="catalogue" class="text-decoration-none text-main-indigo fw-bold small text-uppercase">
-                <i class="fa-solid fa-arrow-left me-1"></i> Retourner au catalogue
-            </a>
-        </div>
+        
     </div>
 
     <%-- Bootstrap JS bundle --%>

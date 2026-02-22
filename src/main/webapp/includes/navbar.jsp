@@ -1,52 +1,70 @@
 <%@ taglib uri="jakarta.tags.core" prefix="c" %>
-<%-- Style spécifique pour matcher l'app React --%>
+
 <style>
-    .main-header { height: 90px; background: white; }
+    /* Styles pour copier exactement ton design React/Tailwind avec Bootstrap */
+    .main-header { height: 90px; background: white; border-bottom: 1px solid #e5e7eb; }
     .sub-nav { background-color: #f2f2f2; border-bottom: 4px solid #8c7ae6; min-height: 55px; }
     .nav-link-custom { 
         font-size: 11px; font-weight: 700; text-transform: uppercase; 
         color: #6b7280 !important; padding: 18px 25px !important;
-        transition: all 0.3s;
+        text-decoration: none; display: flex; align-items: center;
     }
     .nav-link-custom:hover { color: #8c7ae6 !important; background: rgba(0,0,0,0.02); }
-    .nav-active { background-color: white !important; color: #111827 !important; border-bottom: 0; }
+    .nav-active { background-color: white !important; color: #111827 !important; }
+    .logo-text { font-size: 20px; font-weight: 800; text-transform: uppercase; letter-spacing: -0.5px; }
 </style>
 
-<!-- Partie Haute : Logo et Déconnexion -->
-<header class="main-header shadow-sm d-flex justify-content-between align-items-center px-5">
+<!-- SECTION 1 : HEADER (Logo + Déconnexion) -->
+<header class="main-header d-flex justify-content-between align-items-center px-5">
     <div class="d-flex align-items-center">
-        <i class="fa-solid fa-book-bookmark fs-1 text-primary me-3" style="color: #4f46e5 !important;"></i>
-        <h1 class="h4 fw-bold mb-0 text-uppercase tracking-tighter">Bibliothèque En Ligne</h1>
+        <i class="fa-solid fa-book-bookmark fs-1 me-3" style="color: #4f46e5;"></i>
+        <span class="logo-text">Bibliothèque <span style="color: #4f46e5;">En Ligne</span></span>
     </div>
     
     <div class="d-flex align-items-center">
-        <span class="me-3 small text-muted fw-bold text-uppercase">${userSession.nom}</span>
-        <form action="${pageContext.request.contextPath}/logout" method="post">
-            <button type="submit" class="btn btn-danger btn-sm fw-bold text-uppercase px-4 shadow-sm" style="font-size: 10px;">
+        <span class="me-4 small text-muted fw-bold text-uppercase">
+            <i class="fa-regular fa-circle-user me-1"></i> ${userSession.nom}
+        </span>
+        <form action="${pageContext.request.contextPath}/logout" method="post" class="m-0">
+            <button type="submit" class="btn btn-danger btn-sm fw-bold text-uppercase px-4 shadow-sm" style="font-size: 10px; border-radius: 8px;">
                 Déconnexion
             </button>
         </form>
     </div>
 </header>
 
-<!-- Partie Basse : Liens dynamiques selon le Rôle -->
-<nav class="sub-nav shadow-sm">
-    <div class="container-fluid d-flex justify-content-end p-0 px-md-5">
+<!-- SECTION 2 : NAVBAR DYNAMIQUE (Logique des rôles) -->
+<nav class="sub-nav">
+    <div class="container-fluid d-flex justify-content-end p-0 px-md-5 h-100">
         
-        <!-- LIENS POUR LE BIBLIOTHÉCAIRE -->
-        <c:if test="${userSession.role == 'ADMIN'}">
-            <a href="dashboard" class="nav-link nav-link-custom">Tableau de bord</a>
-            <a href="membres" class="nav-link nav-link-custom">Adhérents</a>
-            <a href="gestion-livres" class="nav-link nav-link-custom">Gestion Ouvrages</a>
-        </c:if>
+        <!-- LIEN COMMUN : Tableau de bord -->
+        <a href="${pageContext.request.contextPath}/dashboard" class="nav-link-custom">Tableau de bord</a>
 
-        <!-- LIENS POUR L'ADHÉRENT -->
-        <c:if test="${userSession.role == 'ADHERENT'}">
-            <a href="catalogue" class="nav-link nav-link-custom">Catalogue</a>
-            <a href="mes-emprunts" class="nav-link nav-link-custom">Mes Emprunts</a>
-        </c:if>
+        <c:choose>
+            <%-- LOGIQUE SI BIBLIOTHÉCAIRE (ADMIN) --%>
+            <c:when test="${userSession.role == 'ADMIN'}">
+                <a href="${pageContext.request.contextPath}/membres" class="nav-link-custom">
+                    <i class="fa-solid fa-users-gear me-2"></i> Adhérents
+                </a>
+                <a href="${pageContext.request.contextPath}/gestion-livres" class="nav-link-custom">
+                    <i class="fa-solid fa-book-stack me-2"></i> Gestion Livres
+                </a>
+            </c:when>
 
-        <!-- LIEN COMMUN -->
-        <a href="profil" class="nav-link nav-link-custom">Mon Profil</a>
+            <%-- LOGIQUE SI ADHÉRENT (ADHERENT) --%>
+            <c:otherwise>
+                <a href="${pageContext.request.contextPath}/mes-emprunts" class="nav-link-custom">
+                    <i class="fa-solid fa-box-archive me-2"></i> Mes Livres
+                </a>
+                <a href="${pageContext.request.contextPath}/catalogue" class="nav-link-custom">
+                    <i class="fa-solid fa-magnifying-glass me-2"></i> Emprunter
+                </a>
+            </c:otherwise>
+        </c:choose>
+
+        <!-- LIEN COMMUN : Profil -->
+        <a href="${pageContext.request.contextPath}/profil" class="nav-link-custom">
+            <i class="fa-solid fa-user-pen me-2"></i> Profil
+        </a>
     </div>
 </nav>
