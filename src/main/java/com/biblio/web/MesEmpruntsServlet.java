@@ -26,13 +26,7 @@ public class MesEmpruntsServlet extends HttpServlet {
         HttpSession session = request.getSession();
         Utilisateur userConnecte = (Utilisateur) session.getAttribute("userSession");
 
-        // --- TRICHE POUR LE TEST (à enlever quand le login marchera) ---
-        if (userConnecte == null) {
-            userConnecte = new Utilisateur();
-            userConnecte.setId(1L); 
-        }
-        // ---------------------------------------------------------------
-
+    
         // 1. On demande la liste au cerveau (EJB)
         List<Emprunt> liste = empruntService.listerMesEmprunts(userConnecte.getId());
 
