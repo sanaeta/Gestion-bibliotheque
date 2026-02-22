@@ -27,7 +27,7 @@ public class RetourServlet extends HttpServlet {
             empruntService.retournerLivre(idEmprunt);
 
             // On redirige vers la liste des emprunts avec un message
-            request.getSession().setAttribute("message", "Livre rendu ! Le stock a été mis à jour.");
+            request.getSession().setAttribute("message", "Livre rendu !");
             response.sendRedirect("mes-emprunts"); // On recharge la liste
 
         } catch (Exception e) {
