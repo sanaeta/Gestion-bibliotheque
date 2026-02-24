@@ -19,7 +19,7 @@ public class LoginServlet extends HttpServlet {
         Utilisateur user = service.verifierLogin(request.getParameter("email"), request.getParameter("password"));
         if (user != null) {
             request.getSession().setAttribute("userSession", user);
-            if ("ADMIN".equals(user.getRole())) response.sendRedirect("admin/dashboard.jsp");
+            if ("ADMIN".equals(user.getRole())) response.sendRedirect("admin/gestion_membres.jsp");
             else response.sendRedirect("catalogue.jsp");
         } else {
             response.sendRedirect("login.jsp?error=1");
