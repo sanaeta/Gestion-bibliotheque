@@ -1,7 +1,7 @@
 package com.biblio.web;
 
 import com.biblio.entities.Utilisateur;
-import com.biblio.services.UtilisateurService;
+import com.biblio.services.AuthService;
 import jakarta.ejb.EJB;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
@@ -13,14 +13,22 @@ public class LoginServlet extends HttpServlet {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	@EJB private UtilisateurService service;
+	@EJB private AuthService authService;
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        Utilisateur user = service.verifierLogin(request.getParameter("email"), request.getParameter("password"));
-        if (user != null) {
+        String email = request.getParameter("email");
+        String pass = request.getParameter("password");
+        String roleForm = request.getParameter("role");
+
+        Utilisateur user = authService.login(email, pass);
+
+        if (user != null && user.getRole().equals(roleForm)) {
             request.getSession().setAttribute("userSession", user);
-            if ("ADMIN".equals(user.getRole())) response.sendRedirect("admin/gestion_membres.jsp");
-            else response.sendRedirect("catalogue.jsp");
+            if ("ADMIN".equals(user.getRole())) {
+                response.sendRedirect("admin/membres");
+            } else {
+                response.sendRedirect("client/mes_emprunts.jsp");
+            }
         } else {
             response.sendRedirect("login.jsp?error=1");
         }
