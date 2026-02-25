@@ -17,7 +17,9 @@ public class UserService {
         Utilisateur u = em.find(Utilisateur.class, id);
         if (u != null) em.remove(u);
     }
-
+    public Utilisateur trouver(Long id) {
+        return em.find(Utilisateur.class, id);
+    }
     public List<Utilisateur> listerTousLesMembres() {
         return em.createQuery("SELECT u FROM Utilisateur u WHERE u.role = 'ADHERENT'", Utilisateur.class).getResultList();
     }

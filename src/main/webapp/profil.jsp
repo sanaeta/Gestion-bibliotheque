@@ -90,9 +90,7 @@
                     </form>
                     
                     <div class="text-center mt-4">
-                        <a href="logout" class="text-danger fw-bold text-decoration-none small">
-                            <i class="fa-solid fa-right-from-bracket me-1"></i> SE DÉCONNECTER
-                        </a>
+                        
                     </div>
                 </div>
             </div>
