@@ -17,7 +17,8 @@ import com.biblio.entities.Utilisateur;
 @WebServlet("/mes-emprunts")
 public class MesEmpruntsServlet extends HttpServlet {
 
-    @EJB
+    private static final long serialVersionUID = 1L;
+	@EJB
     private EmpruntService empruntService;
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) 
