@@ -14,7 +14,7 @@
 <body>
     <jsp:include page="/includes/navbar.jsp" /> <!-- Intégration de la navbar de l'étudiant C -->
 
-    <div class="header-bg"><h1 class="fw-bold text-uppercase">Gestion des Adhérents</h1></div>
+    
 
     <div class="container pb-5">
         <div class="card-main">

@@ -25,7 +25,7 @@
         <span class="me-4 small text-muted fw-bold text-uppercase">
             <i class="fa-regular fa-circle-user me-1"></i> ${userSession.nom}
         </span>
-        <form action="${pageContext.request.contextPath}/logout" method="post" class="m-0">
+        <form action="http://localhost:8080/gestion-bibliotheque/login.jsp" method="post" class="m-0">
             <button type="submit" class="btn btn-danger btn-sm fw-bold text-uppercase px-4 shadow-sm" style="font-size: 10px; border-radius: 8px;">
                 Déconnexion
             </button>
@@ -38,32 +38,32 @@
     <div class="container-fluid d-flex justify-content-end p-0 px-md-5 h-100">
         
         <!-- LIEN COMMUN : Tableau de bord -->
-        <a href="${pageContext.request.contextPath}/dashboard" class="nav-link-custom">Tableau de bord</a>
+        <a href="http://localhost:8080/gestion-bibliotheque/dashboard" class="nav-link-custom">Tableau de bord</a>
 
         <c:choose>
             <%-- LOGIQUE SI BIBLIOTHÉCAIRE (ADMIN) --%>
             <c:when test="${userSession.role == 'ADMIN'}">
-                <a href="${pageContext.request.contextPath}/membres" class="nav-link-custom">
+                <a href="http://localhost:8080/gestion-bibliotheque/admin/membres" class="nav-link-custom">
                     <i class="fa-solid fa-users-gear me-2"></i> Adhérents
                 </a>
-                <a href="${pageContext.request.contextPath}/gestion-livres" class="nav-link-custom">
+                <a href="http://localhost:8080/gestion-bibliotheque/gestion-livres" class="nav-link-custom">
                     <i class="fa-solid fa-book-stack me-2"></i> Gestion Livres
                 </a>
             </c:when>
 
             <%-- LOGIQUE SI ADHÉRENT (ADHERENT) --%>
             <c:otherwise>
-                <a href="${pageContext.request.contextPath}/mes-emprunts" class="nav-link-custom">
+                <a href="http://localhost:8080/gestion-bibliotheque/mes-emprunts" class="nav-link-custom">
                     <i class="fa-solid fa-box-archive me-2"></i> Mes Livres
                 </a>
-                <a href="${pageContext.request.contextPath}/catalogue" class="nav-link-custom">
+                <a href="http://localhost:8080/gestion-bibliotheque/catalogue" class="nav-link-custom">
                     <i class="fa-solid fa-magnifying-glass me-2"></i> Emprunter
                 </a>
             </c:otherwise>
         </c:choose>
 
         <!-- LIEN COMMUN : Profil -->
-        <a href="${pageContext.request.contextPath}/profil" class="nav-link-custom">
+        <a href="http://localhost:8080/gestion-bibliotheque/profil.jsp" class="nav-link-custom">
             <i class="fa-solid fa-user-pen me-2"></i> Profil
         </a>
     </div>
