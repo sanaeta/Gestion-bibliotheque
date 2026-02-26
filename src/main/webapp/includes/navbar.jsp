@@ -26,11 +26,7 @@
             <i class="fa-regular fa-circle-user me-1"></i> ${userSession.nom}
         </span>
         <form action="http://localhost:8080/gestion-bibliotheque/login.jsp" method="post" class="m-0">
-            <a href="/logout" 
-   class="btn btn-danger btn-sm fw-bold text-uppercase px-4 shadow-sm" 
-   style="font-size: 10px; border-radius: 8px; text-decoration: none; display: inline-block;">
-    Déconnexion
-</a>
+            <button type="submit" class="btn btn-danger btn-sm fw-bold text-uppercase px-4 shadow-sm" style="font-size: 10px; border-radius: 8px;">Déconnexion</button>
         </form>
     </div>
 </header>

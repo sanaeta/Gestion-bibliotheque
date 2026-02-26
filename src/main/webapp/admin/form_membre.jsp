@@ -1,43 +1,52 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="jakarta.tags.core" prefix="c" %>
+<!DOCTYPE html>
 <html>
 <head>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Formulaire Adhérent</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body class="bg-light">
+<body class="bg-[#f8fafc]">
     <jsp:include page="/includes/navbar.jsp" />
-    <div class="container mt-5">
-        <div class="card shadow-sm mx-auto" style="max-width: 500px; border-radius: 15px;">
-            <div class="card-header text-white text-center py-4" style="background: #4f46e5; border-radius: 15px 15px 0 0;">
-                <h4 class="m-0">${not empty membre ? 'MODIFIER' : 'AJOUTER'} UN ADHÉRENT</h4>
-            </div>
-            <div class="card-body p-4">
-                <form action="membres" method="post">
-                    <!-- ID caché si c'est une modification -->
-                    <input type="hidden" name="id" value="${membre.id}">
-                    
-                    <div class="mb-3">
-                        <label class="form-label fw-bold">NOM COMPLET</label>
-                        <input type="text" name="nom" class="form-control" value="${membre.nom}" required>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label fw-bold">EMAIL</label>
-                        <input type="email" name="email" class="form-control" value="${membre.email}" required>
-                    </div>
-                    
-                    <!-- On ne demande le mot de passe que pour un nouveau membre -->
-                    <c:if test="${empty membre}">
-                        <div class="mb-4">
-                            <label class="form-label fw-bold">MOT DE PASSE</label>
-                            <input type="password" name="password" class="form-control" required>
-                        </div>
-                    </c:if>
 
-                    <button type="submit" class="btn btn-primary w-100 fw-bold py-2" style="background: #4f46e5;">ENREGISTRER</button>
-                    <a href="membres" class="btn btn-link w-100 mt-2 text-muted text-decoration-none">Annuler</a>
-                </form>
-            </div>
+    <main class="p-8">
+        <div class="max-w-xl mx-auto bg-white p-8 border rounded shadow-sm mt-10">
+            <h2 class="text-xl font-bold uppercase mb-6 text-gray-700 border-b pb-4">
+                <c:choose>
+                    <c:when test="${not empty membre}">Modifier l'Adhérent</c:when>
+                    <c:otherwise>Ajouter un Adhérent</c:otherwise>
+                </c:choose>
+            </h2>
+
+            <form action="${pageContext.request.contextPath}/admin/membres" method="post" class="space-y-4">
+                <input type="hidden" name="id" value="${membre.id}">
+                
+                <div>
+                    <label class="text-[10px] font-bold text-gray-400 uppercase">Nom Complet</label>
+                    <input name="nom" class="w-full border p-3 rounded mt-1 focus:outline-indigo-500" value="${membre.nom}" required />
+                </div>
+
+                <div>
+                    <label class="text-[10px] font-bold text-gray-400 uppercase">Adresse Email</label>
+                    <input name="email" type="email" class="w-full border p-3 rounded mt-1 focus:outline-indigo-500" value="${membre.email}" required />
+                </div>
+                
+                <c:if test="${empty membre}">
+                    <div>
+                        <label class="text-[10px] font-bold text-gray-400 uppercase">Mot de passe</label>
+                        <input name="password" type="password" class="w-full border p-3 rounded mt-1 focus:outline-indigo-500" required />
+                    </div>
+                </c:if>
+
+                <div class="pt-4">
+                    <button type="submit" class="w-full bg-[#4f46e5] text-white font-bold py-3 rounded uppercase text-sm shadow-md hover:bg-indigo-700">
+                        Enregistrer
+                    </button>
+                    <a href="${pageContext.request.contextPath}/admin/membres" class="block text-center text-xs font-bold text-gray-400 uppercase mt-4 hover:text-gray-600">Annuler</a>
+                </div>
+            </form>
         </div>
-    </div>
+    </main>
 </body>
 </html>
