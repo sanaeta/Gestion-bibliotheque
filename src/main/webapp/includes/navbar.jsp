@@ -1,3 +1,5 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <%@ taglib uri="jakarta.tags.core" prefix="c" %>
 
 <style>
@@ -16,7 +18,7 @@
 <header class="main-header d-flex justify-content-between align-items-center px-5">
     <div class="d-flex align-items-center">
         <i class="fa-solid fa-book-bookmark fs-1 me-3" style="color: #4f46e5;"></i>
-        <span class="logo-text">Bibliothèque <span style="color: #4f46e5;">En Ligne</span></span>
+        <span class="logo-text">Bibliothéque <span style="color: #4f46e5;">En Ligne</span></span>
     </div>
     
     <div class="d-flex align-items-center">
@@ -34,23 +36,23 @@
 <nav class="sub-nav">
     <div class="container-fluid d-flex justify-content-end p-0 px-md-5 h-100">
         
-        <a href="http://localhost:8080/gestion-bibliotheque/dashboard" class="nav-link-custom">Tableau de bord</a>
+        <a href="${pageContext.request.contextPath}/livres?action=dashboard" class="nav-link-custom">Tableau de bord</a>
 
         <c:choose>
             <c:when test="${userSession.role == 'ADMIN'}">
                 <a href="http://localhost:8080/gestion-bibliotheque/admin/membres" class="nav-link-custom">
                     <i class="fa-solid fa-users-gear me-2"></i> Adhérents
                 </a>
-                <a href="http://localhost:8080/gestion-bibliotheque/gestion-livres" class="nav-link-custom">
+                <a href="${pageContext.request.contextPath}/livres?action=gestion" class="nav-link-custom">
                     <i class="fa-solid fa-book-stack me-2"></i> Gestion Livres
                 </a>
             </c:when>
             
             <c:otherwise>
-                <a href="http://localhost:8080/gestion-bibliotheque/mes-emprunts" class="nav-link-custom">
+                <a href="${pageContext.request.contextPath}/mes-emprunts?action=mes_livres" class="nav-link-custom">
                     <i class="fa-solid fa-box-archive me-2"></i> Mes Livres
                 </a>
-                <a href="http://localhost:8080/gestion-bibliotheque/catalogue" class="nav-link-custom">
+                <a  href="${pageContext.request.contextPath}/livres?action=catalogue" class="nav-link-custom">
                     <i class="fa-solid fa-magnifying-glass me-2"></i> Emprunter
                 </a>
             </c:otherwise>

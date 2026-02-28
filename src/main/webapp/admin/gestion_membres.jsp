@@ -35,7 +35,7 @@
                             <td class="fw-bold">${m.nom}</td>
                             <td class="text-muted">${m.email}</td>
                             <td class="text-center">
-                                <a href="${pageContext.request.contextPath}/admin/membres?action=edit" class="text-primary me-3"><i class="fa-solid fa-pen"></i>
+                                <a href="${pageContext.request.contextPath}/admin/membres?action=edit&id=${m.id}"  class="text-primary me-3 text-decoration-none"><i class="fa-solid fa-pen"></i>
 </a>
                                 <a href="membres?action=delete&id=${m.id}" class="btn btn-sm btn-light text-danger" onclick="return confirm('Supprimer ?')"><i class="fa-solid fa-trash"></i></a>
                             </td>
